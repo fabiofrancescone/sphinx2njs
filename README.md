@@ -1,4 +1,4 @@
-# 📚 sphinx2njs (DITA → Next.js Documentation Engine)
+#  sphinx2njs (DITA → Next.js Documentation Engine)
 
 A modern documentation pipeline that replaces Sphinx with a **DITA-based content system + Next.js renderer**.
 
@@ -6,7 +6,7 @@ It transforms structured DITA XML into a **clean JSON documentation graph**, whi
 
 ---
 
-## 🧭 Architecture Overview
+##  Architecture Overview
 
 DITA XML (authoring layer)  
 ↓  
@@ -20,19 +20,19 @@ Next.js (UI + routing)
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-- 📄 DITA-based structured content  
-- 🔄 Automated transformation pipeline (XML → JSON)  
-- 🌳 Navigation tree generation from `.ditamap`  
-- 🧼 Clean content normalization (no XML in frontend)  
-- ⚡ Next.js App Router integration  
-- 📦 Dockerized DITA-OT build environment  
-- 🧩 Ready for sidebar, search, and full docs portal UI  
+-  DITA-based structured content  
+-  Automated transformation pipeline (XML → JSON)  
+-  Navigation tree generation from `.ditamap`  
+-  Clean content normalization (no XML in frontend)  
+-  Next.js App Router integration  
+-  Dockerized DITA-OT build environment  
+-  Ready for sidebar, search, and full docs portal UI  
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 sphinx2njs/  
 ├── content/  
@@ -64,7 +64,7 @@ sphinx2njs/
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
 ### 1. Write documentation in DITA
 
@@ -105,7 +105,7 @@ http://localhost:3000/docs
 
 ---
 
-## 🧠 Core Design Principles
+##  Core Design Principles
 
 ### 1. DITA is only for authoring
 Frontend never parses XML.
@@ -118,7 +118,7 @@ No knowledge of DITA structure required.
 
 ---
 
-## 🚧 Current Status
+##  Current Status
 
 ### Completed
 - DITA parsing  
@@ -139,7 +139,7 @@ No knowledge of DITA structure required.
 
 ---
 
-## 📌 Example Routes
+##  Example Routes
 
 /docs  
 /docs/search  
@@ -147,7 +147,7 @@ No knowledge of DITA structure required.
 
 ---
 
-## 🧩 Tech Stack
+##  Tech Stack
 
 - DITA-OT 4.x  
 - Node.js (Transformer layer)  
@@ -157,7 +157,7 @@ No knowledge of DITA structure required.
 
 ---
 
-## 🚀 Goal
+##  Goal
 
 Replace traditional documentation systems (Sphinx / static HTML pipelines) with a:
 
