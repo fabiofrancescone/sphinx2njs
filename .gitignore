@@ -1,3 +1,19 @@
+# DITA-OT output
 out/
 temp/
+
+# Node / Next.js (future)
+node_modules/
+.next/
+dist/
+
+# Logs
 *.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Docker (optional cleanup artifacts)
+*.pid
+*.tmp
