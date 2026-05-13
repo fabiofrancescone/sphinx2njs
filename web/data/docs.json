@@ -1,0 +1,30 @@
+{
+  "type": "docs",
+  "title": "Carbonio User Guide",
+  "navigation": [
+    {
+      "type": "node",
+      "href": "topics/search/quick-search.dita",
+      "title": "Using Quick Search",
+      "topic": {
+        "id": "quick-search",
+        "title": "Using Quick Search",
+        "shortdesc": "Learn how to quickly search items in Carbonio.",
+        "body": [
+          {
+            "type": "section",
+            "id": "open-search",
+            "title": "Open the Search Bar",
+            "children": [
+              {
+                "type": "paragraph",
+                "text": "Use the search field located at the top of the interface."
+              }
+            ]
+          }
+        ]
+      },
+      "children": []
+    }
+  ]
+}

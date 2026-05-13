@@ -1,252 +1,164 @@
-<!-- README.md -->
+# 📚 sphinx2njs (DITA → Next.js Documentation Engine)
 
-# sphinx2njs
+A modern documentation pipeline that replaces Sphinx with a **DITA-based content system + Next.js renderer**.
 
-Experimental documentation platform based on:
-
-- DITA XML for structured content authoring
-- Node.js transformers for content normalization
-- Next.js for frontend rendering
-- Dockerized DITA-OT for validation and reference HTML generation
-
-The goal of this project is to replace the current Sphinx-based documentation portal with a modern architecture where:
-
-```
-DITA XML
-   ↓
-Transformer Layer
-   ↓
-Normalized JSON AST
-   ↓
-Next.js Frontend
-```
-
-Instead of generating the final website directly from DITA-OT HTML output, this project uses DITA as the authoring source and transforms content into a frontend-friendly JSON model rendered entirely by Next.js.
+It transforms structured DITA XML into a **clean JSON documentation graph**, which is then rendered by a Next.js frontend.
 
 ---
 
-# Architecture Overview
+## 🧭 Architecture Overview
 
-## Content Layer
-
-Technical writers create content using DITA XML.
-
-Example:
-
-```
-content/dita/topics/search/quick-search.dita
-```
-
-DITA maps define navigation hierarchy:
-
-```
-content/dita/user-guide.ditamap
-```
+DITA XML (authoring layer)  
+↓  
+DITA-OT (validation & build)  
+↓  
+Transformer (Node.js)  
+↓  
+Normalized JSON Graph  
+↓  
+Next.js (UI + routing)
 
 ---
 
-## Transformation Layer
+## ✨ Key Features
 
-Custom Node.js transformers parse DITA content and normalize it into a JSON AST.
-
-Example flow:
-
-```
-DITA XML
-   ↓
-parseTopic.js
-   ↓
-Normalized JSON
-```
-
-Example output:
-
-```json
-{
-  "id": "quick-search",
-  "type": "topic",
-  "title": "Using Quick Search",
-  "body": [
-    {
-      "type": "section",
-      "title": "Open the Search Bar"
-    }
-  ]
-}
-```
-
-The frontend never parses XML directly.
+- 📄 DITA-based structured content  
+- 🔄 Automated transformation pipeline (XML → JSON)  
+- 🌳 Navigation tree generation from `.ditamap`  
+- 🧼 Clean content normalization (no XML in frontend)  
+- ⚡ Next.js App Router integration  
+- 📦 Dockerized DITA-OT build environment  
+- 🧩 Ready for sidebar, search, and full docs portal UI  
 
 ---
 
-## Frontend Layer
+## 📁 Repository Structure
 
-Next.js will eventually consume generated JSON files and render:
-
-- pages
-- navigation
-- breadcrumbs
-- search
-- UI components
-
-The presentation layer is fully separated from DITA internals.
-
----
-
-# Repository Structure
-
-```
-.
-├── content/
-│   ├── dita/
-│   │   ├── maps/
-│   │   ├── topics/
-│   │   ├── images/
-│   │   └── reusable/
-│   └── scripts/
-│       └── dita-build.sh
-│
-├── containers/
-│   └── Dockerfile.dita
-│
-├── packages/
-│   └── transformer/
-│       ├── package.json
-│       └── src/
-│           └── parseTopic.js
-│
-└── out/
-```
+sphinx2njs/  
+├── content/  
+│   └── dita/  
+│       ├── maps/  
+│       ├── topics/  
+│       ├── images/  
+│       └── reusable/  
+│  
+├── packages/  
+│   └── transformer/  
+│       └── src/  
+│           ├── buildDocsGraph.js  
+│           ├── parseMap.js  
+│           └── parseTopic.js  
+│  
+├── web/  
+│   └── app/  
+│       ├── docs/  
+│       │   └── [[...slug]]/  
+│       ├── layout.tsx  
+│       └── page.tsx  
+│  
+├── containers/  
+│   └── Dockerfile.dita  
+│  
+└── scripts/  
+    └── dita-build.sh  
 
 ---
 
-# Requirements
+## ⚙️ How It Works
 
-- Docker
-- Node.js 22+
-- npm
-- Git
+### 1. Write documentation in DITA
+
+<concept id="quick-search">
+  <title>Using Quick Search</title>
+  <shortdesc>Learn how to quickly search items in Carbonio.</shortdesc>
+
+  <conbody>
+    <section id="open-search">
+      <title>Open the Search Bar</title>
+      <p>Use the search field located at the top of the interface.</p>
+    </section>
+  </conbody>
+</concept>
 
 ---
 
-# DITA Build
+### 2. Build DITA output (optional validation step)
 
-The repository includes a Dockerized DITA-OT build pipeline.
-
-Run:
-
-```bash
 ./content/scripts/dita-build.sh
-```
-
-This generates HTML output inside:
-
-```
-out/
-```
-
-The DITA-OT HTML output is currently used for:
-
-- validation
-- reference rendering
-- debugging
-
-It is NOT intended to be the final frontend renderer.
 
 ---
 
-# Transformer Prototype
+### 3. Generate JSON documentation graph
 
-The first transformer prototype is located at:
-
-```
-packages/transformer/src/parseTopic.js
-```
-
-Run:
-
-```bash
-cd packages/transformer
-node src/parseTopic.js
-```
-
-This converts a DITA topic into a normalized JSON structure.
-
-Currently supported:
-
-- concept/topic/reference/task detection
-- sections
-- paragraphs
+node packages/transformer/src/buildDocsGraph.js
 
 ---
 
-# Long-Term Goals
+### 4. Run Next.js frontend
 
-## Planned Features
+cd web  
+npm install  
+npm run dev  
 
-- DITA map parser
-- navigation tree generation
-- search index generation
-- React component mapping
-- syntax highlighting
-- reusable content support
-- versioned documentation
-- localization support
+Open:  
+http://localhost:3000/docs  
 
 ---
 
-# Design Principles
+## 🧠 Core Design Principles
 
-## Structured Authoring
+### 1. DITA is only for authoring
+Frontend never parses XML.
 
-DITA remains the canonical content source.
+### 2. Transformer is the single source of truth
+It produces a clean JSON graph.
 
-## Frontend Independence
-
-Next.js never consumes raw XML.
-
-## Semantic Normalization
-
-DITA specializations are normalized into a unified application schema.
-
-## Component-Based Rendering
-
-Frontend rendering is based on semantic JSON nodes rather than generated HTML.
+### 3. Next.js is only a renderer
+No knowledge of DITA structure required.
 
 ---
 
-# Current Status
+## 🚧 Current Status
 
-## Working
+### Completed
+- DITA parsing  
+- map → navigation tree  
+- topic normalization  
+- Next.js routing  
+- docs layout integration  
 
-- Dockerized DITA-OT
-- DITA HTML5 generation
-- XML parsing
-- JSON topic normalization
+### In progress
+- Sidebar navigation UI  
+- Route indexing improvements  
 
-## In Progress
-
-- DITAMAP parsing
-- navigation generation
-- Next.js integration
-
----
-
-# Vision
-
-This project aims to evolve from:
-
-```
-Static documentation generator
-```
-
-to:
-
-```
-Structured documentation platform
-```
+### Next steps
+- Search index generation  
+- Breadcrumb system  
+- Incremental builds (watch mode)  
+- GitBook-style UI enhancements  
 
 ---
 
-*README maintained for sphinx2njs monorepo (DITA → JSON → Next.js pipeline)*
+## 📌 Example Routes
 
+/docs  
+/docs/search  
+/docs/search/quick-search  
+
+---
+
+## 🧩 Tech Stack
+
+- DITA-OT 4.x  
+- Node.js (Transformer layer)  
+- fast-xml-parser  
+- Next.js App Router  
+- Docker (build isolation)  
+
+---
+
+## 🚀 Goal
+
+Replace traditional documentation systems (Sphinx / static HTML pipelines) with a:
+
+modern, structured, UI-driven documentation platform powered by DITA + Next.js
