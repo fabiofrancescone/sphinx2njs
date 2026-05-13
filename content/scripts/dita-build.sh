@@ -1,15 +1,14 @@
 #!/bin/bash
-
 set -e
 
-ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT_DIR="$(git rev-parse --show-toplevel)"
 
 docker build \
-  -f containers/Dockerfile.dita \
+  -f "$ROOT_DIR/containers/Dockerfile.dita" \
   -t local/dita-ot \
   "$ROOT_DIR"
 
 docker run --rm \
   -v "$ROOT_DIR:/workspace" \
   local/dita-ot \
-  dita --input=/workspace/dita/user-guide.ditamap --format=html5 --verbose
+  dita -i /workspace/content/dita/user-guide.ditamap -f html5 --verbose
