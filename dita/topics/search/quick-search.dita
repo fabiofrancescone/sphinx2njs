@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+
+<concept id="quick-search">
+
+    <title>Using Quick Search</title>
+
+    <shortdesc>
+        Learn how to quickly search items in Carbonio.
+    </shortdesc>
+
+    <conbody>
+
+        <section id="open-search">
+
+            <title>Open the Search Bar</title>
+
+            <p>
+                Use the search field located at the top of the interface.
+            </p>
+
+        </section>
+
+    </conbody>
+
+</concept>

@@ -1,0 +1,12 @@
+FROM eclipse-temurin:21-jre
+
+ENV DITA_OT_VERSION=4.3.1
+
+RUN apt-get update && \
+    apt-get install -y wget unzip && \
+    wget https://github.com/dita-ot/dita-ot/releases/download/${DITA_OT_VERSION}/dita-ot-${DITA_OT_VERSION}.zip && \
+    unzip dita-ot-${DITA_OT_VERSION}.zip && \
+    mv dita-ot-${DITA_OT_VERSION} /opt/dita-ot && \
+    ln -s /opt/dita-ot/bin/dita /usr/local/bin/dita
+
+WORKDIR /workspace
